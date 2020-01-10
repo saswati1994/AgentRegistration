@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register here</title>
+</head>
+<body>
+<h1>Registration Form</h1>
+<form th:action="@{/registration}" th:object="${registrationForm}" method="post">
+    <label for="fname">FName</label>
+    <input type="text" id="fname" name="fname" autofocus="autofocus">
+    <label for="lname">LName</label>
+    <input type="text" id="lname" name="lname" autofocus="autofocus">
+    <br/>
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" autofocus="autofocus">
+    <label for="confirmEmail">Email</label>
+    <input type="text" id="confirmEmail" name="confirmEmail" autofocus="autofocus">
+
+    <br/>
+    <label for="phoneno">PhoneNo</label>
+    <input type="text" id="phoneno" name="phoneno" autofocus="autofocus">
+    <label for="confirmphoneno">ConfirmPhoneNo</label>
+    <input type="text" id="confirmphoneno" name="confirmphoneno" autofocus="autofocus">
+
+    <br/>
+   <!-- <a th:href="@{/registrations}">Next  </a>-->
+    <input type="submit" value="Register"/>
+
+</form>
+</body>
+</html>
