@@ -1,8 +1,10 @@
 package com.test.AgentRegistration.Controller;
 
-import com.test.AgentRegistration.Entity.LoginForm;
-import com.test.AgentRegistration.Entity.RegistrationForm;
-import com.test.AgentRegistration.Repository.RegistrationRepository;
+import com.test.AgentRegistration.Entity.Agent;
+
+import com.test.AgentRegistration.Repository.AgentRepository;
+import com.test.AgentRegistration.Service.RegistrationService;
+import com.test.AgentRegistration.exception.UserExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +15,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class RegistrationController {
     @Autowired
-    RegistrationRepository registrationRepository;
+    RegistrationService registrationService;
+
+    @Autowired
+    AgentRepository agentRepository;
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String getRegistrationForm(){
         return "registration";
     }
     @RequestMapping(value = "/registration",method = RequestMethod.POST)
-    public String registerAgent(@ModelAttribute(name="RegistrationForm") RegistrationForm registrationForm, Model model){
+    public String registerAgent(@ModelAttribute(name="RegistrationForm") Agent agent, Model model) throws UserExistsException {
+        registrationService.validate(agent);
 
-        registrationRepository.save(registrationForm);
+        agentRepository.save(agent);
         return "success";
     }
 }
